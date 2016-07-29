@@ -158,9 +158,8 @@ class SVN(Dict):
         url = URL(url).quoted()
         if peg is not None or rev is not None:
             url += '@'+(peg or rev).split(':')[-1]
-        args = []
+        args = ['--depth', depth]
         if rev is not None: args += ['--revision', rev.split(':')[0]]
-        ['--depth', depth]
         if xml==True: 
             args.append('--xml')
         if verbose==True and xml != True: 
