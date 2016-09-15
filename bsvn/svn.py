@@ -1,19 +1,21 @@
 # interface to subversion repository
 
-import os, subprocess, tempfile, traceback, sys
+import os, subprocess, tempfile, traceback, sys, logging
 from lxml import etree
 from bl.dict import Dict
 from bl.url import URL
 
+LOG = logging.getLogger(__file__)
+
 class SVN(Dict):
     "direct interface to a Subversion repository using svn and svnmucc via subprocess"
 
-    def __init__(self, log=print, 
+    def __init__(self,
             url=None, local=None, parent_path=None,
             username=None, password=None, trust_server_cert=True, 
             svn=None, svnmucc=None, svnlook=None, 
             access_file=None):
-        Dict.__init__(self, log_=log, 
+        Dict.__init__(self, 
             url=URL(url or ''), local=local, parent_path=parent_path,
             username=username, password=password, trust_server_cert=trust_server_cert, 
             svn=svn or 'svn', svnmucc=svnmucc or 'svnmucc', svnlook=svnlook or 'svnlook')
@@ -70,8 +72,8 @@ class SVN(Dict):
         except subprocess.CalledProcessError as e:
             with open(stderr.name, 'r') as f:
                 output = f.read()
-            self.log_(traceback.format_exc())
-            self.log_(output)
+            LOG.error(traceback.format_exc())
+            LOG.error(output)
             raise RuntimeError(output).with_traceback(sys.exc_info()[2]) from None
 
     # == USER API COMMANDS == 
