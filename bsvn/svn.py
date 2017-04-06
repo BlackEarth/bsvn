@@ -65,9 +65,11 @@ class SVN(Dict):
         cmdlist += list(args)
         cmdlist = list(cmdlist)
         # The following overcomes a bug in svn: svn needs os.curdir to be something sensible.
+        curdir = os.path.abspath(os.curdir)
         os.chdir(os.environ.get('HOME') or self.local or self.parent_path)
         try:
             res = subprocess.check_output(cmdlist, stderr=stderr)
+            os.chdir(curdir)
             return res
         except subprocess.CalledProcessError as e:
             with open(stderr.name, 'r') as f:
