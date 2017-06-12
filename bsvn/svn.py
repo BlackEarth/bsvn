@@ -73,8 +73,6 @@ class SVN(Dict):
         except subprocess.CalledProcessError as e:
             with open(stderr.name, 'r') as f:
                 output = f.read()
-            LOG.error(traceback.format_exc())
-            LOG.error(output)
             raise RuntimeError(output).with_traceback(sys.exc_info()[2]) from None
 
     # == USER API COMMANDS == 
