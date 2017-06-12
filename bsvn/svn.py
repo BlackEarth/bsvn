@@ -24,7 +24,7 @@ class SVN(Dict):
             self.access_file = SVNAccessFile(access_file)
 
     def __repr__(self):
-        return "SVN(url='%s')" % self.url
+        return "%s(url='%s')" % (self.__class__.__name__, self.url)
 
     def __call__(self, *args):
         "uses svn to access the repository"
@@ -64,12 +64,11 @@ class SVN(Dict):
                 cmdlist += ['--password', self.password]
         cmdlist += list(args)
         cmdlist = list(cmdlist)
+        LOG.debug(cmdlist)
         # The following overcomes a bug in svn: svn needs os.curdir to be something sensible.
-        curdir = os.path.abspath(os.curdir)
         os.chdir(os.environ.get('HOME') or self.local or self.parent_path)
         try:
             res = subprocess.check_output(cmdlist, stderr=stderr)
-            os.chdir(curdir)
             return res
         except subprocess.CalledProcessError as e:
             with open(stderr.name, 'r') as f:
