@@ -1,6 +1,6 @@
 {
   "name": "bsvn",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Subversion interface library",
   "url": "https://github.com/BlackEarth/bsvn",
   "author": "Sean Harrison",
