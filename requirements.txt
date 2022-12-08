@@ -1,7 +1,7 @@
 -e git+https://github.com/BlackEarth/bf.git@7380396afcdbbf0c93d9c737f16d5451aaed83a6#egg=bf
 -e git+https://github.com/BlackEarth/bl.git@2ef4586b72f07f27babcdc7a8150972fb47aa8d0#egg=bl
 -e git+https://github.com/BlackEarth/bxml.git@09ef53aa6fc4fcde870e6bd19d7eeaa112ac6687#egg=bxml
-certifi==2018.4.16
+certifi==2022.12.7
 chardet==3.0.4
 cssselect==1.0.3
 cssutils==1.0.2
